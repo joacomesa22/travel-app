@@ -38,11 +38,11 @@ const Weather = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    error && setError(false);
     const data = await getUserWeather(query);
     if (data.cod == "404") {
       setError(true);
     } else {
-      error && setError(false);
       setCityData({
         name: data.name,
         temp: data.main.temp.toFixed(),
@@ -50,8 +50,8 @@ const Weather = () => {
         humidity: data.main.humidity,
         icon: data.weather[0].icon,
       });
-      setLoading(false);
     }
+    setLoading(false);
     setQuery("");
   };
 
