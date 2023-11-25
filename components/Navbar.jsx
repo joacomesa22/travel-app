@@ -19,38 +19,32 @@ import {
   XMarkIcon,
   BanknotesIcon,
 } from "@heroicons/react/24/outline";
-import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  PhoneIcon,
-  SunIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/solid";
+import { SunIcon, UserGroupIcon } from "@heroicons/react/24/solid";
 import { audiowide, montserrat } from "@/assets/fonts";
 const navListMenuItems = [
   {
     title: "Translator",
     description: "Translator app",
     icon: UserGroupIcon,
-    route: "translator",
+    route: "apis/translator",
   },
   {
     title: "Weather",
     description: "Get the weather of your location",
     icon: SunIcon,
-    route: "weather",
+    route: "apis/weather",
   },
   {
     title: "Currency Converter",
     description: "Convert any currency to another",
     icon: BanknotesIcon,
-    route: "currency-converter",
+    route: "apis/currency-converter",
   },
   {
     title: "Country Information",
     description: "Learn how we can help you achieve your goals.",
     icon: SunIcon,
-    route: "country-info",
+    route: "apis/country-info",
   },
 ];
 
