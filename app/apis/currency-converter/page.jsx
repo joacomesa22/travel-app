@@ -26,12 +26,12 @@ const CurrencyConverter = () => {
     setLoading(false);
   };
   return (
-    <div className="flex flex-col items-center gap-4 p-8 rounded-lg border-4 border-blue-500">
+    <div className="flex flex-col items-center gap-4 p-4 mdp:-8 rounded-lg border">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
-        className="flex items-center gap-4"
+        className="flex flex-wrap justify-center items-center gap-4"
       >
         <select
           onChange={(e) => {
@@ -58,6 +58,7 @@ const CurrencyConverter = () => {
           onChange={(e) => {
             setAmount(e.target.value);
           }}
+          defaultValue={1}
           className="text-black p-2 rounded-md [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <ButtonDefault type="submit" text="convert" />

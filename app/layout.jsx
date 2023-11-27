@@ -1,10 +1,11 @@
 import "./globals.css";
 import { montserrat } from "@/assets/fonts";
+import Footer from "@/components/Footer";
 import { NavbarWithMegaMenu } from "@/components/Navbar";
 
 export const metadata = {
-  title: "API-Verse",
-  description: "Website full of APIs!",
+  title: "Travel Kit",
+  description: "Pocket guide for travelers!",
 };
 
 export default function RootLayout({ children }) {
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body className={`${montserrat.className} bg-[#0d0d0d] text-white`}>
         <NavbarWithMegaMenu />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 const ApisLayout = ({ children }) => {
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <div className="h-screen flex flex-col items-center justify-center px-4">
       {children}
     </div>
   );

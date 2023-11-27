@@ -32,7 +32,7 @@ const Translator = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-8 rounded-lg border-4 border-blue-500">
+    <div className="flex flex-col gap-4 p-8 rounded-lg border w-full sm:max-w-[400px]">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -86,20 +86,21 @@ const Translator = () => {
             setText(e.target.value);
           }}
           className="text-black resize-none rounded-lg p-2"
+          required
         ></textarea>
         <ButtonDefault type="submit" text="Translate" />
       </form>
       <div className="flex flex-col justify-center items-center">
-        <span className="text-lg text-gray-300">Translation:</span>
+        <span className="text-base text-gray-300">Translation:</span>
 
         {loading ? (
           <div className="mt-4">
             <DefaultSpinner />
           </div>
         ) : error !== true ? (
-          <div className="flex justify-center flex-col">
+          <div className="mt-4">
             {translation !== null && error !== true && (
-              <p className="text-4xl">{translation}</p>
+              <p className="text-xl">{translation}</p>
             )}
           </div>
         ) : (

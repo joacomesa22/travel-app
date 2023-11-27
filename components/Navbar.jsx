@@ -18,14 +18,17 @@ import {
   Bars3Icon,
   XMarkIcon,
   BanknotesIcon,
+  FlagIcon,
+  SunIcon,
+  LanguageIcon,
 } from "@heroicons/react/24/outline";
-import { SunIcon, UserGroupIcon } from "@heroicons/react/24/solid";
 import { audiowide, montserrat } from "@/assets/fonts";
+
 const navListMenuItems = [
   {
     title: "Translator",
     description: "Translator app",
-    icon: UserGroupIcon,
+    icon: LanguageIcon,
     route: "apis/translator",
   },
   {
@@ -43,7 +46,7 @@ const navListMenuItems = [
   {
     title: "Country Information",
     description: "Learn how we can help you achieve your goals.",
-    icon: SunIcon,
+    icon: FlagIcon,
     route: "apis/country-info",
   },
 ];
@@ -55,7 +58,7 @@ function NavListMenu() {
     ({ icon, title, description, route }, key) => (
       <Link href={`/${route}`} key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
+          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
             {createElement(icon, {
               strokeWidth: 2,
               className: "h-6 text-gray-900 w-6",
@@ -120,13 +123,10 @@ function NavListMenu() {
 function NavList() {
   return (
     <List
-      className={`mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 ${montserrat.className} text-blue-gray-900`}
+      className={`mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 ${montserrat.className} text-blue-gray-900 !min-w-max`}
     >
       <Link href="/">
         <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
-      </Link>
-      <Link href="/about">
-        <ListItem className="flex items-center gap-2 py-2 pr-4">About</ListItem>
       </Link>
       <NavListMenu />
     </List>
@@ -145,11 +145,11 @@ export function NavbarWithMegaMenu() {
 
   return (
     <Navbar
-      className={`mx-auto max-w-screen-md px-4 py-2 text-black fixed  top-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-bl from-gray-100 to-gray-300`}
+      className={`z-10 mx-auto max-w-screen-md px-4 py-2 text-black rounded-t-none  fixed  top-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-bl from-gray-100 to-gray-300`}
     >
       <div className="flex items-center justify-between">
         <Link href="/" className={`${audiowide.className}`}>
-          Travel API Kit
+          Travel Kit
         </Link>
 
         <div className="hidden lg:block">

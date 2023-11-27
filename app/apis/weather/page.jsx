@@ -56,14 +56,17 @@ const Weather = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 rounded-lg border-4 border-blue-500">
+    <div className="flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
         className="flex flex-col items-center gap-6"
       >
-        <label htmlFor="weatherSearch" className="text-4xl">
+        <label
+          htmlFor="weatherSearch"
+          className="text-2xl md:text-4xl text-center"
+        >
           Enter city name!
         </label>
         <input
