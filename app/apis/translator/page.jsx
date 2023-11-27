@@ -32,7 +32,7 @@ const Translator = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-8 rounded-lg border w-full sm:max-w-[400px]">
+    <div className="flex flex-col gap-4 p-6 md:p-8 rounded-lg border w-full sm:max-w-[400px]">
       <form
         onSubmit={(e) => {
           handleSubmit(e);

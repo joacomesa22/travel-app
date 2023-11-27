@@ -16,7 +16,7 @@ const CountryInfo = () => {
         .then((data) =>
           data
             .filter((country) => country.name.common.includes(query))
-            .slice(0, 3)
+            .slice(0, 6)
         )
     );
   };
@@ -90,7 +90,7 @@ const CountryInfo = () => {
                       {country.name.common}
                     </h3>
                   </div>
-                  <div className="text-lg">
+                  <div className="text-base md:text-lg">
                     <p>
                       <span className="text-gray-300 text-sm">Continent:</span>{" "}
                       {country.region}
