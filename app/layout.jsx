@@ -5,13 +5,15 @@ import { NavbarWithMegaMenu } from "@/components/Navbar";
 
 export const metadata = {
   title: "Travel Kit",
-  description: "Pocket guide for travelers!",
+  description: "All-in-one website for travelers!",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} bg-[#0d0d0d] text-white`}>
+      <body
+        className={`${montserrat.className} bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#181818] to-[#000] text-white `}
+      >
         <NavbarWithMegaMenu />
         <main>{children}</main>
         <Footer />

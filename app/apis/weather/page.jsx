@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ButtonDefault } from "@/components/Button";
 import { DefaultSpinner } from "@/components/Spinner";
+import ApiTitle from "@/components/ApiTitle";
 
 const API_KEY = "89763055f86210c1808b9b40f60c6e47";
 
@@ -29,104 +30,123 @@ const Weather = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const getUserWeather = (city) => {
-    return fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-    ).then((res) => res.json());
+  const getUserWeather = async (city) => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      throw error;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    error && setError(false);
-    const data = await getUserWeather(query);
-    if (data.cod == "404") {
+
+    try {
+      error && setError(false);
+      const data = await getUserWeather(query);
+      if (data.cod === "404") {
+        setError(true);
+      } else {
+        setCityData({
+          name: data.name,
+          temp: data.main.temp.toFixed(),
+          wind: data.wind.speed,
+          humidity: data.main.humidity,
+          icon: data.weather[0].icon,
+        });
+      }
+    } catch (error) {
       setError(true);
-    } else {
-      setCityData({
-        name: data.name,
-        temp: data.main.temp.toFixed(),
-        wind: data.wind.speed,
-        humidity: data.main.humidity,
-        icon: data.weather[0].icon,
-      });
+    } finally {
+      setLoading(false);
+      setQuery("");
     }
-    setLoading(false);
-    setQuery("");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-        className="flex flex-col items-center gap-6"
-      >
-        <label
-          htmlFor="weatherSearch"
-          className="text-2xl md:text-4xl text-center"
-        >
-          Enter city name!
-        </label>
-        <input
-          type="text"
-          id="weatherSearch"
-          className="text-black p-2 rounded-full"
-          onChange={(e) => {
-            setQuery(e.target.value);
+    <>
+      <ApiTitle
+        title="Weather"
+        text="Get real-time weather info from all around the world. Just enter the name of the city below and hit the Search button!"
+      />
+      <div className="flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border">
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
           }}
-          placeholder="Buenos Aires..."
-          value={query}
-          required
-        />
-        <ButtonDefault type={"submit"} text={"Search"} />
-      </form>
-      {loading ? (
-        <div className="mt-4">
-          <DefaultSpinner />
-        </div>
-      ) : (
-        cityData !== null &&
-        error === false && (
-          <div className="flex flex-col items-center w-full ">
-            <Image
-              src={`/images/${icons[cityData.icon]}`}
-              width={140}
-              height={140}
-              alt="Weather Icon"
-            />
-            <span className="text-3xl">{cityData.temp}&deg;</span>
-            <p className="text-2xl">{cityData.name}</p>
-            <div className="flex justify-between w-full">
-              <div className="flex flex-col justify-center items-center gap-2">
-                <Image
-                  src={`/images/wind.png`}
-                  width={60}
-                  height={60}
-                  alt="Wind Icon"
-                />{" "}
-                <p>{cityData.wind} km/h</p>
-              </div>
-              <div className="flex flex-col justify-center items-center gap-2">
-                <Image
-                  src={`/images/humidity.png`}
-                  width={60}
-                  height={60}
-                  alt="Humidiy Icon"
-                />{" "}
-                <p>{cityData.humidity} %</p>
+          className="flex flex-col items-center gap-6"
+        >
+          <label
+            htmlFor="weatherSearch"
+            className="text-2xl md:text-4xl text-center"
+          >
+            Enter city name!
+          </label>
+          <input
+            type="text"
+            id="weatherSearch"
+            className="text-black p-2 rounded-full"
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+            placeholder="Buenos Aires..."
+            value={query}
+            required
+          />
+          <ButtonDefault type={"submit"} text={"Search"} />
+        </form>
+        {loading ? (
+          <div className="mt-4">
+            <DefaultSpinner />
+          </div>
+        ) : (
+          cityData !== null &&
+          error === false && (
+            <div className="flex flex-col items-center w-full ">
+              <Image
+                src={`/images/${icons[cityData.icon]}`}
+                width={140}
+                height={140}
+                alt="Weather Icon"
+              />
+              <span className="text-3xl">{cityData.temp}&deg;</span>
+              <p className="text-2xl">{cityData.name}</p>
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col justify-center items-center gap-2">
+                  <Image
+                    src={`/images/wind.png`}
+                    width={60}
+                    height={60}
+                    alt="Wind Icon"
+                  />{" "}
+                  <p>{cityData.wind} km/h</p>
+                </div>
+                <div className="flex flex-col justify-center items-center gap-2">
+                  <Image
+                    src={`/images/humidity.png`}
+                    width={60}
+                    height={60}
+                    alt="Humidiy Icon"
+                  />{" "}
+                  <p>{cityData.humidity} %</p>
+                </div>
               </div>
             </div>
+          )
+        )}
+        {error === true && (
+          <div className="mt-6">
+            <p className="text-red-500">Something went wrong</p>
           </div>
-        )
-      )}
-      {error === true && (
-        <div className="mt-6">
-          <p className="text-red-500">Please enter a valid city</p>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
