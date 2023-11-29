@@ -5,7 +5,7 @@ import { NavbarWithMegaMenu } from "@/components/Navbar";
 
 export const metadata = {
   title: "Travel Kit",
-  description: "All-in-one website for travelers!",
+  description: "All-in-one app for travelers!",
 };
 
 export default function RootLayout({ children }) {
