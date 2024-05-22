@@ -16,6 +16,7 @@ const icons = {
   "03n": "cloud.png",
   "04d": "cloud.png",
   "04n": "cloud.png",
+  "50d": "cloud.png",
   "09d": "cloud-showers-heavy.png",
   "09n": "cloud-showers-heavy.png",
   "10d": "cloud-bolt.png",
@@ -50,6 +51,7 @@ const Weather = () => {
     try {
       error && setError(false);
       const data = await getUserWeather(query);
+      console.log(data);
       if (data.cod === "404") {
         setError(true);
       } else {
